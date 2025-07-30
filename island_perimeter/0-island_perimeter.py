@@ -1,27 +1,40 @@
 #!/usr/bin/python3
+"""
+0-island_perimeter module:
+Given a grid of integers representing water (0) and land (1),
+computes and returns the perimeter of the island.
+
+The grid is rectangular, surrounded by water, with at most one island.
+"""
+
 
 def island_perimeter(grid):
     """
-    Determines the perimeter of the grid
+    Determines the perimeter of the island in the grid.
 
     Args:
-        grid : array of list of 0 or 1 (0 for water, 1 for land)
-
+        grid (list of list of int):
+            2D list where 0 represents water and 1 represents land.
     Returns:
-        int of the perimeter
+        int: perimeter of the island (sum of exposed sides of land cells).
     """
-    # result will be the total perimeter of the island
     result = 0
-    # for loop to test all sides of an island square
-    for linepos, line in enumerate(grid):
-        for keypos, cell in enumerate(line):
+
+    # Iterate over each cell to count exposed sides
+    for row_idx, row in enumerate(grid):
+        for col_idx, cell in enumerate(row):
             if cell == 1:
-                total = 0
-                top = grid[linepos - 1][keypos]
-                bottom = grid[linepos + 1][keypos]
-                right = line[keypos + 1]
-                left = line[keypos - 1]
-                total = 4 - (top + bottom + right + left)
-                result += total
-    # return result of the perimeter
+                # Top side
+                if row_idx == 0 or grid[row_idx - 1][col_idx] == 0:
+                    result += 1
+                # Bottom side
+                if row_idx == len(grid) - 1 or grid[row_idx + 1][col_idx] == 0:
+                    result += 1
+                # Left side
+                if col_idx == 0 or row[col_idx - 1] == 0:
+                    result += 1
+                # Right side
+                if col_idx == len(row) - 1 or row[col_idx + 1] == 0:
+                    result += 1
+
     return result
