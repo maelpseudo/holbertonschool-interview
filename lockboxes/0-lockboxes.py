@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 def canUnlockAll(boxes):
     """
     Détermine si l’on peut ouvrir toutes les boîtes numérotées de 0 à n-1.
