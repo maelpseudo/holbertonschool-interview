@@ -18,19 +18,22 @@ def canUnlockAll(boxes):
             True if every box from 0 to n-1 can be opened by collecting keys
             starting from box 0; False otherwise.
     """
-    # Initialize open status: 0 = closed, 1 = open
-    isopen = [0] * len(boxes)
-    # Box 0 is unlocked by default
-    isopen[0] = 1
+    n = len(boxes)
+    # Track which boxes have been opened
+    opened = [False] * n
+    opened[0] = True
+    # Use a stack (or list) to process boxes to explore
+    stack = [0]
 
-    # Collect keys: for each box, mark the box corresponding to the first valid key as open
-    for box in boxes:
-        for key in box:
-            # Only process keys that refer to existing boxes
-            if 0 <= key < len(boxes):
-                isopen[key] = 1
-            # Break after first key, as in original logic
-            break
+    # While there are boxes to explore
+    while stack:
+        current = stack.pop()
+        # Iterate through keys in the current box
+        for key in boxes[current]:
+            # If key corresponds to a valid, unopened box, open and add to stack
+            if 0 <= key < n and not opened[key]:
+                opened[key] = True
+                stack.append(key)
 
-    # Check final state: return True if no box remains closed
-    return False if 0 in isopen else True
+    # All boxes opened if no False remains
+    return all(opened)
