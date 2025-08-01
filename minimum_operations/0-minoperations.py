@@ -2,7 +2,6 @@
 """
 0-minoperations.py
 """
-import shutil, os
 
 
 def minOperations(n):
