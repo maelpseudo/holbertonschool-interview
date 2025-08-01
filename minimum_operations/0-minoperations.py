@@ -1,7 +1,14 @@
 #!/usr/bin/python3
+"""
+0-minoperations.py
+"""
 import shutil, os
 
 def minOperations(n):
+    """
+    minOperations function returns the number of operations
+    for n character
+    """
     if n <= 1:
         return 0
 
