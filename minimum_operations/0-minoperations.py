@@ -4,6 +4,7 @@
 """
 import shutil, os
 
+
 def minOperations(n):
     """
     minOperations function returns the number of operations
